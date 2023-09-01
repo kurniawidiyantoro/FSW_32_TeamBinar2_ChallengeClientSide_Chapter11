@@ -62,9 +62,9 @@ const LeaderBoard = ({ isLoggedIn, user}) => {
     
       const handleGeneratePDF = () => {
         const doc = new jsPDF();
-        doc.text('Game RPS Report', 10, 10); // Add title
+        doc.text('Game RPS Report', 10, 10); 
     
-        // Generate the table
+        //Buat table
         const columns = ['#', 'Username', 'Game Name', 'Status', 'Total Score'];
         const tableData = playerData.map((player, index) => [
           index + 1,
@@ -79,7 +79,7 @@ const LeaderBoard = ({ isLoggedIn, user}) => {
           body: tableData,
         });
     
-        // Save the PDF
+        //Save PDF
         doc.save('Game-RPS.pdf');
       };
     
