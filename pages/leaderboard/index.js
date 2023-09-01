@@ -6,6 +6,9 @@ import styles from "../../styles/feature.module.css";
 import { connect, useDispatch } from 'react-redux';
 import Axios from 'axios';
 import { Skeleton, Pagination  } from 'antd';
+// import generatePDF from '../PDFReport';
+import { jsPDF } from 'jspdf';
+import 'jspdf-autotable';
 
 const LeaderBoard = ({ isLoggedIn, user}) => {
     const [username, setUsername] = useState('');
@@ -14,6 +17,7 @@ const LeaderBoard = ({ isLoggedIn, user}) => {
     const [playerData, setPlayerData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
+    const [showPDF, setShowPDF] = useState(false);
 
     const handleBackClick = () => {
         window.location.replace('/gamelist');
@@ -55,7 +59,31 @@ const LeaderBoard = ({ isLoggedIn, user}) => {
         (currentPage - 1) * pageSize,
         currentPage * pageSize
       );
-      
+    
+      const handleGeneratePDF = () => {
+        const doc = new jsPDF();
+        doc.text('Game RPS Report', 10, 10); // Add title
+    
+        // Generate the table
+        const columns = ['#', 'Username', 'Game Name', 'Status', 'Total Score'];
+        const tableData = playerData.map((player, index) => [
+          index + 1,
+          player.username,
+          player.gamename,
+          player.status,
+          player.totalscore,
+        ]);
+    
+        doc.autoTable({
+          head: [columns],
+          body: tableData,
+        });
+    
+        // Save the PDF
+        doc.save('Game-RPS.pdf');
+      };
+    
+
     useEffect(() => {
         getData();
       }, []);
@@ -119,6 +147,11 @@ const LeaderBoard = ({ isLoggedIn, user}) => {
           <div>
 
       </div>
+      <Button color="success" onClick={handleGeneratePDF} className= {styles.buttonPDF}>
+        Generate PDF
+      </Button>
+
+      
   </div>
 );
 };

@@ -112,6 +112,12 @@
   gap: 10px; 
 }
 
+.buttonPDF{
+  position: absolute;
+  bottom: 60px;
+  left: 18%;
+}
+
   @media (min-width: 768px) {
     .mderw-sm {
       max-width: 2xl;
