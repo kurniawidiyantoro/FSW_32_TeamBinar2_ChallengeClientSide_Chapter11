@@ -3,7 +3,7 @@ import axios from 'axios';
 export default async (req, res) => {
   try {
     
-    const response = await axios.get('http://localhost:3005/usergame/get');
+    const response = await axios.get(`${process.env.REACT_APP_BE_URL}/usergame/get`);
 
     
     const userData = response.data;

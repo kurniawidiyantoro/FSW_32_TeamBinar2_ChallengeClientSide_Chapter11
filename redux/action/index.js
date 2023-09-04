@@ -54,7 +54,7 @@ export const fetchUserTotalScore = (userEmail) => async (dispatch) => {
     }
 
     const response = await Axios.post(
-      'http://localhost:3005/gamehistory/get/rank',
+      `${process.env.REACT_APP_BE_URL}/gamehistory/get/rank`,
       { email: userEmail, gamename },
       {
         headers: {

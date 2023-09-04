@@ -46,7 +46,7 @@ function Game() {
     const token = localStorage.getItem("token");
     const email = localStorage.getItem("email");
     const response = await Axios.post(
-      "http://localhost:3005/gamehistory/insert",
+      `${process.env.REACT_APP_BE_URL}/gamehistory/insert`,
       { gamename, id, username, email, round, status, getscore, totalscore },
       {
         headers: {
@@ -101,7 +101,7 @@ function Game() {
         window.location.replace("/login");
       } else {
         const response = await Axios.post(
-          "http://localhost:3005/gamehistory/get",
+          `${process.env.REACT_APP_BE_URL}/gamehistory/get`,
           { email, gamename },
           {
             headers: {
